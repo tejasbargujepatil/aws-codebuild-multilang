@@ -1,0 +1,68 @@
+name: Multi-Language Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-python:
+    name: Run Python Program
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Show Python version
+        run: python --version
+
+      - name: Run numbers.py
+        run: python python/numbers.py
+
+  run-java:
+    name: Compile and Run Java Program
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Show Java version
+        run: java -version
+
+      - name: Compile Numbers.java
+        run: javac java/Numbers.java
+
+      - name: Run Numbers
+        run: java -cp java Numbers
+
+  summary:
+    name: Build Summary
+    runs-on: ubuntu-latest
+    needs: [run-python, run-java]
+
+    steps:
+      - name: Print summary
+        run: |
+          echo "==============================="
+          echo "   ALL JOBS COMPLETED"
+          echo "==============================="
+          echo "✅ Python job   : passed"
+          echo "✅ Java job     : passed"
+          echo "Build finished at $(date)"
+          echo "==============================="
