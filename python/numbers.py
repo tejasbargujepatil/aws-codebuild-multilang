@@ -1,4 +1,4 @@
-numbers = [45, 12, 78, 3, 56, 89, 23, 67, 34, 91]
+numbers = [45, 12, 78, 3, 56, 89, 23, 67, 34, 91,102,158,12,22,4,1578]
 
 highest = max(numbers)
 lowest  = min(numbers)
