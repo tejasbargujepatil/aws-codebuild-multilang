@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+      java: corretto17
+    commands:
+      - echo "=== Installing runtimes ==="
+      - python --version
+      - java -version
+
+  pre_build:
+    commands:
+      - echo "=== Pre-build checks ==="
+      - echo "Repo contents:"
+      - ls -la
+      - echo "Python files:"
+      - ls python/
+      - echo "Java files:"
+      - ls java/
+
+  build:
+    commands:
+      - echo "==============================="
+      - echo "   RUNNING PYTHON PROGRAM"
+      - echo "==============================="
+      - python python/numbers.py
+
+      - echo "==============================="
+      - echo "   COMPILING AND RUNNING JAVA"
+      - echo "==============================="
+      - javac java/Numbers.java
+      - java -cp java Numbers
+
+  post_build:
+    commands:
+      - echo "==============================="
+      - echo "   ALL PROGRAMS COMPLETED"
+      - echo "==============================="
+      - echo "Build finished at $(date)"
