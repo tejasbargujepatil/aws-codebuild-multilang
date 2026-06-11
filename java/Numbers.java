@@ -1,6 +1,6 @@
 public class Numbers {
     public static void main(String[] args) {
-        int[] numbers = {45, 12, 78, 3, 56, 89, 23, 67, 34, 91};
+        int[] numbers = {45, 12, 78, 3, 56, 89, 23, 67, 34, 91,154,5,48,5,98};
 
         int highest = numbers[0];
         int lowest  = numbers[0];
